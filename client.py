@@ -9,8 +9,7 @@ import sys
 
 # Cliente UDP
 
-if not len(sys.argv) == 3:
-    sys.exit("Usage: python client.py method receiver@IP:SIPport")
+
 
 if sys.argv[1] != 'INVITE' and sys.argv[1] != 'BYE':
     sys.exit("Usage: python client.py method receiver@IP:SIPport")
