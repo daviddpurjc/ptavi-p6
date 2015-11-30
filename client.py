@@ -40,11 +40,11 @@ my_socket.connect((IP, PUERTO))
 print("Enviando: " + LINE)
 my_socket.send(bytes(LINE, 'utf-8') + b'\r\n')
 data = my_socket.recv(1024)
-respuesta = data.decode('utf-8')
+r = data.decode('utf-8')
 
-print('Recibido -- ', respuesta)
+print('Recibido -- ', r)
 
-if respuesta == "SIP/2.0 100 Trying\r\nSIP/2.0 180 Ring\r\nSIP/2.0 200 OK\r\n\r\n":
+if r == "SIP/2.0 100 Trying\r\nSIP/2.0 180 Ring\r\nSIP/2.0 200 OK\r\n\r\n":
     print("Enviando: " + LINE2)
     my_socket.send(bytes(LINE2, 'utf-8') + b'\r\n')
     data = my_socket.recv(5120)
