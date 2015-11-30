@@ -25,10 +25,10 @@ if str(sys.argv[2]).find(':') == -1:
 METODO = sys.argv[1]
 cadena = str(sys.argv[2])
 LOGIN = cadena[:cadena.find('@')]
-IP = cadena[cadena.find('@')+1:cadena.find(':')] 
+IP = cadena[cadena.find('@')+1:cadena.find(':')]
 PUERTO = int(cadena[cadena.find(':')+1:])
 
-LINE = METODO+ ' sip:'+LOGIN+'@'+IP+' SIP/2.0\r\n'
+LINE = METODO + ' sip:'+LOGIN+'@'+IP+' SIP/2.0\r\n'
 LINE2 = 'ACK sip:'+LOGIN+'@'+IP+' SIP/2.0\r\n'
 LINE3 = 'BYE sip:'+LOGIN+'@'+IP+' SIP/2.0\r\n'
 
@@ -40,10 +40,11 @@ my_socket.connect((IP, PUERTO))
 print("Enviando: " + LINE)
 my_socket.send(bytes(LINE, 'utf-8') + b'\r\n')
 data = my_socket.recv(1024)
+respuesta = data.decode('utf-8')
 
-print('Recibido -- ', data.decode('utf-8'))
+print('Recibido -- ', respuesta)
 
-if data.decode('utf-8')=="SIP/2.0 100 Trying\r\nSIP/2.0 180 Ring\r\nSIP/2.0 200 OK\r\n\r\n":
+if respuesta == "SIP/2.0 100 Trying\r\nSIP/2.0 180 Ring\r\nSIP/2.0 200 OK\r\n\r\n":
     print("Enviando: " + LINE2)
     my_socket.send(bytes(LINE2, 'utf-8') + b'\r\n')
     data = my_socket.recv(5120)
