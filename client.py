@@ -6,10 +6,12 @@ Programa cliente que abre un socket a un servidor
 
 import socket
 import sys
+import random
 
 # Cliente UDP
 
-
+if not len(sys.argv) == 3:
+    sys.exit("Usage: python client.py method receiver@IP:SIPport")
 
 if sys.argv[1] != 'INVITE' and sys.argv[1] != 'BYE':
     sys.exit("Usage: python client.py method receiver@IP:SIPport")
@@ -26,6 +28,7 @@ cadena = str(sys.argv[2])
 LOGIN = cadena[:cadena.find('@')]
 IP = cadena[cadena.find('@')+1:cadena.find(':')] 
 PUERTO = int(cadena[cadena.find(':')+1:])
+aleatorio = str(int(random.random() * 1000000))
 
 LINE = METODO+ ' sip:'+LOGIN+'@'+IP+' SIP/2.0\r\n'
 LINE2 = 'ACK sip:'+LOGIN+'@'+IP+' SIP/2.0\r\n'
@@ -52,6 +55,8 @@ if data.decode('utf-8')=="SIP/2.0 100 Trying\r\nSIP/2.0 180 Ring\r\nSIP/2.0 200 
 ###    $cvlc rtp://@127.0.0.1:23032
 print("Terminando socket...")
 
+
 # Cerramos todo
 my_socket.close()
 print("Fin.")
+print(aleatorio)
