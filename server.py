@@ -35,7 +35,7 @@ class SIPHandler(socketserver.DatagramRequestHandler):
         # Cuando el servidor reciba el BYE significará el cese de la llamada.
         elif deco.startswith('BYE'):
             self.wfile.write(b"Cuelga tu, cuelgo yo")
-        # Si el cliente envia algún método no soportado, el servidor se lo hará saber.
+        # Si el método no es válido, el servidor se lo hará saber.
         else:
             self.wfile.write(b"SIP/2.0 405 Method Not Allowed\r\n\r\n")
 
