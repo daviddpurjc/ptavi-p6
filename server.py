@@ -17,9 +17,9 @@ class SIPHandler(socketserver.DatagramRequestHandler):
 
     def handle(self):
         """ Metodo principal del servidor. """
-        # Escribe dirección y puerto del cliente (de tupla client_address)
-        print (self.client_address[0])
-        print (self.client_address[1])
+        # Lee las lineas que manda el cliente, y actúa en consecuencia, o bien enviando la respuesta de Tryinf+Ring+OK, si recibe
+        # un INVITE, o bien enviando el audio si recibe el ACK. Cuando el servidor reciba el BYE significará el cese de la llamada, y en caso de que
+        # cliente envíe algún método no soportado, el servidor se lo hará saber.
         line = self.rfile.read()
         print("El cliente nos manda " + line.decode('utf-8'))
         deco = line.decode('utf-8')
@@ -28,7 +28,6 @@ class SIPHandler(socketserver.DatagramRequestHandler):
         elif deco.startswith('ACK'):
             fichero_audio = str(sys.argv[3])
             aEjecutar = "./mp32rtp -i 127.0.0.1 -p 23032 < " + fichero_audio
-            #aEjecutar = "./mp32rtp -i "+str(self.client_address[0])+" -p "+str(self.client_address[1])+" < " + fichero_audio
             print("Vamos a ejecutar: ")
             print(aEjecutar)
             os.system(aEjecutar)

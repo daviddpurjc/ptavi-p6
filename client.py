@@ -28,7 +28,6 @@ cadena = str(sys.argv[2])
 LOGIN = cadena[:cadena.find('@')]
 IP = cadena[cadena.find('@')+1:cadena.find(':')] 
 PUERTO = int(cadena[cadena.find(':')+1:])
-aleatorio = str(int(random.random() * 1000000))
 
 LINE = METODO+ ' sip:'+LOGIN+'@'+IP+' SIP/2.0\r\n'
 LINE2 = 'ACK sip:'+LOGIN+'@'+IP+' SIP/2.0\r\n'
@@ -59,4 +58,3 @@ print("Terminando socket...")
 # Cerramos todo
 my_socket.close()
 print("Fin.")
-print(aleatorio)
