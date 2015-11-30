@@ -6,7 +6,6 @@ Programa cliente que abre un socket a un servidor
 
 import socket
 import sys
-import random
 
 # Cliente UDP
 
@@ -51,7 +50,7 @@ if data.decode('utf-8')=="SIP/2.0 100 Trying\r\nSIP/2.0 180 Ring\r\nSIP/2.0 200 
     print("Enviando: " + LINE3)
     my_socket.send(bytes(LINE3, 'utf-8') + b'\r\n')
     data = my_socket.recv(1024)
-###    $cvlc rtp://@127.0.0.1:23032
+
 print("Terminando socket...")
 
 
